@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" role="img" aria-label="Lumin Pomodoro settings screen">
+  <rect width="390" height="844" rx="44" fill="#16141f"/>
+  <text x="40" y="100" font-family="monospace" font-size="13" letter-spacing="3" fill="#a39daf">SETTINGS</text>
+  <g font-family="monospace" font-size="15">
+    <rect x="40" y="140" width="318" height="64" rx="14" fill="#201d2b"/>
+    <text x="60" y="178" fill="#f4efe4">Focus length</text>
+    <text x="338" y="178" text-anchor="end" fill="#ff6b35">25 min</text>
+    <rect x="40" y="216" width="318" height="64" rx="14" fill="#201d2b"/>
+    <text x="60" y="254" fill="#f4efe4">Short break</text>
+    <text x="338" y="254" text-anchor="end" fill="#ff6b35">5 min</text>
+    <rect x="40" y="292" width="318" height="64" rx="14" fill="#201d2b"/>
+    <text x="60" y="330" fill="#f4efe4">Long break</text>
+    <text x="338" y="330" text-anchor="end" fill="#ff6b35">15 min</text>
+    <rect x="40" y="368" width="318" height="64" rx="14" fill="#201d2b"/>
+    <text x="60" y="406" fill="#f4efe4">Sound</text>
+    <text x="338" y="406" text-anchor="end" fill="#2cc9b5">soft tick</text>
+    <rect x="40" y="444" width="318" height="64" rx="14" fill="#201d2b"/>
+    <text x="60" y="482" fill="#f4efe4">Theme</text>
+    <text x="338" y="482" text-anchor="end" fill="#f0529c">sunset</text>
+  </g>
+  <rect x="306" y="538" width="52" height="30" rx="15" fill="#ff6b35"/>
+  <circle cx="343" cy="553" r="11" fill="#fffdf7"/>
+  <text x="60" y="558" font-family="monospace" font-size="15" fill="#f4efe4">iCloud sync</text>
+</svg>

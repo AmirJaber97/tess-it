@@ -1,1 +1,188 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Sunset Terminal design system.
+  Semantic tokens live on :root / .dark and flip with the theme;
+  @theme inline maps them to Tailwind utilities (bg-surface, text-ink, …).
+*/
+:root {
+  --su-bg: #fbf5ea;
+  --su-surface: #fffdf7;
+  --su-ink: #221f1a;
+  --su-ink-muted: #6e675c;
+  --su-border: #e7dfce;
+
+  --su-tangerine: #f2521b;
+  --su-magenta: #d9327a;
+  --su-golden: #f2a93b;
+  --su-teal: #1e9e8e;
+
+  /* Accent text needs extra contrast against the cream canvas. */
+  --su-accent-text: #c83d0d;
+}
+
+.dark {
+  --su-bg: #16141f;
+  --su-surface: #201d2b;
+  --su-ink: #f4efe4;
+  --su-ink-muted: #a39daf;
+  --su-border: #332f40;
+
+  --su-tangerine: #ff6b35;
+  --su-magenta: #f0529c;
+  --su-golden: #ffc14d;
+  --su-teal: #2cc9b5;
+
+  --su-accent-text: #ff7d4d;
+}
+
+@theme inline {
+  --color-bg: var(--su-bg);
+  --color-surface: var(--su-surface);
+  --color-ink: var(--su-ink);
+  --color-ink-muted: var(--su-ink-muted);
+  --color-line: var(--su-border);
+
+  --color-tangerine: var(--su-tangerine);
+  --color-magenta: var(--su-magenta);
+  --color-golden: var(--su-golden);
+  --color-teal: var(--su-teal);
+  --color-accent: var(--su-accent-text);
+
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+}
+
+@layer base {
+  html {
+    background-color: var(--su-bg);
+    color: var(--su-ink);
+    font-family: var(--font-body);
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  ::selection {
+    background-color: var(--su-tangerine);
+    color: #fffdf7;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--su-tangerine);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* The four-color signature stripe (top of viewport, heading underlines). */
+  .sunset-stripe {
+    background: linear-gradient(
+      to right,
+      var(--su-tangerine) 0 25%,
+      var(--su-magenta) 25% 50%,
+      var(--su-golden) 50% 75%,
+      var(--su-teal) 75% 100%
+    );
+  }
+
+  /* Mono eyebrow label: "01 / APPS" */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--su-ink-muted);
+  }
+}
+
+@layer utilities {
+  /* Scroll-reveal: elements start hidden, .is-revealed fades them up.
+     The observer script adds the class; no-JS visitors see content because
+     the hidden state is only applied when the script has run (html.js). */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  html.js .reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+}
+
+/*
+  View-transition choreography. <main> carries view-transition-name: page
+  (set here, not via a directive, so Astro doesn't inject competing
+  animations). Header, stripe, and footer are part of the root group,
+  which we pin static — identical across pages, so they appear rock-solid
+  while only the page content moves.
+*/
+main {
+  view-transition-name: page;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(page) {
+    animation: vt-leave 0.25s cubic-bezier(0.4, 0, 1, 1) both;
+  }
+
+  ::view-transition-new(page) {
+    animation: vt-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.07s both;
+  }
+}
+
+@keyframes vt-leave {
+  to {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes vt-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,12 +1,28 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = 'Tess It' } = Astro.props;
+const {
+  title = 'Tess It — apps by Emir',
+  description = 'Indie apps for mobile, web & desktop, built by Emir.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const nav = [
+  { href: '/#apps', label: 'Apps' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+];
 ---
 
 <!doctype html>
@@ -15,9 +31,237 @@ const { title = 'Tess It' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta name="generator" content={Astro.generator} />
+
+    <script is:inline>
+      // Runs before paint to avoid a theme flash. `html.js` gates the
+      // scroll-reveal hidden state so no-JS visitors always see content.
+      (() => {
+        const root = document.documentElement;
+        // First-load intro (stripe draw, typing wordmark, page cascade) plays
+        // once per session; `.revisit` suppresses it on later pages.
+        let visited = !!sessionStorage.getItem('tess-visited');
+        sessionStorage.setItem('tess-visited', '1');
+        const apply = () => {
+          root.classList.add('js');
+          root.classList.toggle('revisit', visited);
+          const stored = localStorage.getItem('theme');
+          const dark = stored
+            ? stored === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          root.classList.toggle('dark', dark);
+        };
+        apply();
+        // View transitions swap <html> attributes; re-apply after each one.
+        document.addEventListener('astro:after-swap', () => {
+          visited = true;
+          apply();
+        });
+      })();
+    </script>
+
     <ClientRouter />
   </head>
-  <body>
-    <slot />
+
+  <body class="bg-bg font-body text-ink antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-surface focus:px-4 focus:py-2 focus:font-mono focus:text-sm"
+    >
+      Skip to content
+    </a>
+
+    <div class="sunset-stripe stripe-top h-1" aria-hidden="true"></div>
+
+    <header class="site-header mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-5">
+      <a href="/" class="font-mono text-base font-medium tracking-tight">
+        <span class="wordmark-text">tess-it</span><span
+          class="cursor-blink text-tangerine"
+          aria-hidden="true">▌</span>
+      </a>
+
+      <nav aria-label="Main" class="flex items-center gap-1 sm:gap-2">
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class="rounded px-2 py-1.5 text-sm text-ink-muted transition-colors hover:text-ink sm:px-3"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+
+        <button
+          id="theme-toggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          class="ml-1 rounded-md border border-line p-2 text-ink-muted transition-[color,border-color,scale] hover:border-tangerine hover:text-ink active:scale-90"
+        >
+          <svg
+            class="block size-4 dark:hidden"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+              d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+            ></path>
+          </svg>
+          <svg
+            class="hidden size-4 dark:block"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <main id="main" class="page-main flex-1">
+      <slot />
+    </main>
+
+    <footer class="mt-24 border-t border-line">
+      <div
+        class="mx-auto flex w-full max-w-5xl flex-col gap-4 px-6 py-10 font-mono text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between"
+      >
+        <p>© {new Date().getFullYear()} Emir · tess-it.net</p>
+        <div class="flex gap-5">
+          <a href="mailto:hello@tess-it.net" class="transition-colors hover:text-accent">Email</a>
+          <a
+            href="https://github.com/tess-it"
+            rel="noopener"
+            class="transition-colors hover:text-accent">GitHub</a
+          >
+          <a
+            href="https://apps.apple.com/developer/tess-it"
+            rel="noopener"
+            class="transition-colors hover:text-accent">App Store</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Theme toggle via delegation so it survives view-transition swaps.
+      document.addEventListener('click', (e) => {
+        const target = e.target as Element | null;
+        if (!target?.closest('#theme-toggle')) return;
+        const root = document.documentElement;
+        const dark = root.classList.toggle('dark');
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+      });
+
+      // Scroll-reveal for .reveal elements; re-runs after every transition.
+      const initReveal = () => {
+        const els = document.querySelectorAll<HTMLElement>('.reveal:not(.is-revealed)');
+        if (els.length === 0) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          els.forEach((el) => el.classList.add('is-revealed'));
+          return;
+        }
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            }
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+        els.forEach((el) => observer.observe(el));
+      };
+      document.addEventListener('astro:page-load', initReveal);
+    </script>
   </body>
 </html>
+
+<style>
+  .cursor-blink {
+    animation: blink 1.2s steps(2, start) infinite;
+  }
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+
+  /*
+    First-load intro, top to bottom: stripe draws across, header fades down,
+    page content fades up. `html.revisit` (set after the first page this
+    session) skips it so in-session navigation keeps a stable frame.
+  */
+  .stripe-top {
+    transform-origin: left;
+    animation: stripe-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes stripe-in {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  .wordmark-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    width: 7ch;
+    animation: typing 0.8s steps(7) 0.45s both;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+  }
+
+  .site-header {
+    animation: fade-down 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+
+  @keyframes fade-down {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  .page-main {
+    animation: fade-up-main 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+  }
+
+  @keyframes fade-up-main {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+
+  :global(html.revisit) .stripe-top,
+  :global(html.revisit) .wordmark-text,
+  :global(html.revisit) .site-header,
+  :global(html.revisit) .page-main {
+    animation: none;
+  }
+</style>

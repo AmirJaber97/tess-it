@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" role="img" aria-label="Lumin Pomodoro timer screen">
+  <rect width="390" height="844" rx="44" fill="#16141f"/>
+  <text x="195" y="96" text-anchor="middle" font-family="monospace" font-size="13" letter-spacing="3" fill="#a39daf">FOCUS · 3 OF 4</text>
+  <circle cx="195" cy="360" r="140" fill="none" stroke="#332f40" stroke-width="14"/>
+  <path d="M195 220 A140 140 0 1 1 62.1 314.7" fill="none" stroke="#ff6b35" stroke-width="14" stroke-linecap="round"/>
+  <text x="195" y="378" text-anchor="middle" font-family="monospace" font-size="56" fill="#f4efe4">18:42</text>
+  <text x="195" y="416" text-anchor="middle" font-family="monospace" font-size="14" fill="#a39daf">deep work</text>
+  <rect x="115" y="600" width="160" height="56" rx="28" fill="#ff6b35"/>
+  <text x="195" y="635" text-anchor="middle" font-family="monospace" font-size="16" fill="#16141f">pause</text>
+  <circle cx="155" cy="720" r="5" fill="#ff6b35"/>
+  <circle cx="182" cy="720" r="5" fill="#ff6b35"/>
+  <circle cx="209" cy="720" r="5" fill="#ff6b35"/>
+  <circle cx="236" cy="720" r="5" fill="#332f40"/>
+</svg>

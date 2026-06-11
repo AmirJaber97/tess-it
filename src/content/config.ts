@@ -13,6 +13,11 @@ const apps = defineCollection({
     screenshots: z.array(z.string()).optional(),
     appStoreUrl: z.string().url().optional(),
     playStoreUrl: z.string().url().optional(),
+    webUrl: z.string().url().optional(),
+    downloadUrl: z.string().url().optional(),
+    platforms: z.array(z.enum(['ios', 'android', 'web', 'windows', 'macos', 'linux'])).default([]),
+    // Which sunset-stripe color this app carries throughout the site.
+    accent: z.enum(['tangerine', 'magenta', 'golden', 'teal']).default('tangerine'),
     published: z.boolean().default(true),
     releaseDate: z.date(),
   }),

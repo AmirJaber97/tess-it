@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const apps = await getCollection('apps', ({ data }) => data.published);
+---
+
+<BaseLayout title="Tess It">
+  <main class="mx-auto max-w-5xl p-6">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold">Tess It</h1>
+      <p class="mt-2 text-lg">Mobile apps by Tess It.</p>
+    </header>
+
+    <section>
+      <h2 class="mb-4 text-2xl font-semibold">Apps</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {apps.map((app) => (
+          <a class="block rounded border p-4" href={`/apps/${app.data.slug ?? app.slug}/`}>
+            <h3 class="text-xl font-semibold">{app.data.name}</h3>
+            <p class="mt-2">{app.data.tagline}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const apps = await getCollection('apps', ({ data }) => data.published);
+  return apps.map((entry) => ({
+    params: { slug: entry.data.slug ?? entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const appSlug = entry.data.slug ?? entry.slug;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title={`${entry.data.name} | Tess It`}>
+  <main class="mx-auto max-w-3xl p-6">
+    <a href="/">← All apps</a>
+
+    <header class="my-8">
+      <h1 class="text-3xl font-bold">{entry.data.name}</h1>
+      <p class="mt-2 text-lg">{entry.data.tagline}</p>
+      <p class="mt-4">{entry.data.description}</p>
+    </header>
+
+    <nav class="mb-8 flex gap-4">
+      <a href={`/apps/${appSlug}/support/`}>Support</a>
+      <a href={`/apps/${appSlug}/privacy/`}>Privacy</a>
+    </nav>
+
+    <article class="prose">
+      <Content />
+    </article>
+  </main>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const apps = await getCollection('apps', ({ data }) => data.published);
+  return apps.map((entry) => ({
+    params: { slug: entry.data.slug ?? entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const appSlug = entry.data.slug ?? entry.slug;
+---
+
+<BaseLayout title={`${entry.data.name} Privacy Policy | Tess It`}>
+  <main class="mx-auto max-w-3xl p-6">
+    <a href={`/apps/${appSlug}/`}>← {entry.data.name}</a>
+    <h1 class="my-8 text-3xl font-bold">{entry.data.name} Privacy Policy</h1>
+    <p>This is the privacy policy placeholder for {entry.data.name}.</p>
+    <p class="mt-4">Replace this with the final app-specific policy before launch.</p>
+  </main>
+</BaseLayout>

@@ -171,12 +171,19 @@ main {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html.js .reveal {
-    opacity: 1;
-    transform: none;
+/*
+  Reduced motion: reduce, don't remove. Movement (slides, parallax, scaling,
+  typing) is stripped by the blanket rule below; the entrance animations are
+  then re-enabled as gentle opacity-only fades. The class selectors win over
+  the universal rule, so these fades survive the blanket kill.
+*/
+@keyframes fade-only {
+  from {
+    opacity: 0;
   }
+}
 
+@media (prefers-reduced-motion: reduce) {
   *,
   ::before,
   ::after {
@@ -184,5 +191,21 @@ main {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  html.js .reveal {
+    transform: none;
+  }
+
+  html.js .reveal.is-revealed {
+    transition: opacity 0.5s ease !important;
+    transition-duration: 0.5s !important;
+  }
+
+  .hero-enter,
+  .site-header,
+  .page-main {
+    animation: fade-only 0.45s ease both !important;
+    animation-duration: 0.45s !important;
   }
 }

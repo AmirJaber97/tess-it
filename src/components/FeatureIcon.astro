@@ -1,0 +1,46 @@
+---
+// Line-icon set for marketing feature blocks. Keys match the `icon` enum
+// in the content schema. Strokes use currentColor so the parent controls color.
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className = '' } = Astro.props;
+
+const paths: Record<string, string> = {
+  // keyboard with key dots — "hotkey"
+  hotkey:
+    'M3 7.5h18a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H3A1.5 1.5 0 0 1 1.5 15V9A1.5 1.5 0 0 1 3 7.5Z M5 11h0 M9 11h0 M13 11h0 M17 11h0 M8 14.5h8',
+  // screen with an arrow sliding in from the left edge — "edge trigger"
+  edge: 'M4 4.5h16a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H4 M3 12h7 M7 9l3 3-3 3',
+  // overlapping cards — "quick switcher"
+  switcher:
+    'M8 4.5h9a1.5 1.5 0 0 1 1.5 1.5v9 M4.5 8.5h9A1.5 1.5 0 0 1 15 10v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 3 18v-8a1.5 1.5 0 0 1 1.5-1.5Z',
+  // paragraph lines — "rich text"
+  richtext: 'M4 6.5h16 M4 11h10 M4 15.5h16 M4 20h7',
+  // padlock — "local & private"
+  lock: 'M6.5 10.5V8a5.5 5.5 0 0 1 11 0v2.5 M5 10.5h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1Z M12 15v2',
+  // lightning — "bolt"
+  bolt: 'M13 2 4 14h7l-1 8 9-12h-7l1-8Z',
+  // sparkle — "sparkles"
+  sparkles:
+    'M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3Z M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z',
+  // circular arrows — "sync"
+  sync: 'M20 11a8 8 0 0 0-14-4.5L4 8 M4 4v4h4 M4 13a8 8 0 0 0 14 4.5L20 16 M20 20v-4h-4',
+};
+
+const d = paths[name] ?? paths.sparkles;
+---
+
+<svg
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  aria-hidden="true"
+>
+  <path d={d}></path>
+</svg>

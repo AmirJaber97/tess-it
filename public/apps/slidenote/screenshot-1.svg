@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="SlideNote slid in from the left edge of a Mac desktop">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2440"/>
+      <stop offset="1" stop-color="#3d2740"/>
+    </linearGradient>
+    <filter id="panel-sh" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="14" dy="0" stdDeviation="26" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="800" fill="url(#wall)"/>
+  <!-- menu bar -->
+  <rect width="1280" height="30" fill="#0e0c16" fill-opacity="0.55"/>
+  <text x="20" y="20" font-family="monospace" font-size="13" fill="#f4efe4"></text>
+  <text x="48" y="20" font-family="sans-serif" font-size="13" font-weight="700" fill="#f4efe4">SlideNote</text>
+  <text x="1188" y="20" font-family="monospace" font-size="13" fill="#cfc9d8">▤ ◴ 9:41</text>
+  <!-- note.text menu bar icon highlighted -->
+  <rect x="1150" y="6" width="22" height="18" rx="4" fill="#ffc14d" fill-opacity="0.25"/>
+  <text x="1153" y="20" font-family="monospace" font-size="13" fill="#ffc14d">▤</text>
+
+  <!-- docked note panel -->
+  <g filter="url(#panel-sh)">
+    <path d="M0 30 H392 a0 0 0 0 1 0 0 V770 a30 30 0 0 1 -30 30 H0 Z" fill="#fbf5ea"/>
+    <rect x="362" y="30" width="30" height="770" fill="#fbf5ea"/>
+  </g>
+  <rect x="389" y="30" width="3" height="770" fill="#ffc14d"/>
+
+  <!-- panel header -->
+  <text x="36" y="86" font-family="monospace" font-size="12" letter-spacing="2" fill="#9a8f7a">SLIDENOTE</text>
+  <circle cx="360" cy="80" r="5" fill="#1e9e8e"/>
+  <!-- note title -->
+  <text x="36" y="138" font-family="sans-serif" font-size="26" font-weight="700" fill="#221f1a">Standup notes</text>
+  <!-- body lines -->
+  <g font-family="sans-serif" font-size="15" fill="#4f4a40">
+    <text x="36" y="184">— Ship the SlideNote landing page</text>
+    <text x="36" y="214">— Reply to TestFlight feedback</text>
+    <text x="36" y="244">— Reassign global hotkey in v1.1</text>
+  </g>
+  <rect x="36" y="280" width="316" height="1" fill="#e7dfce"/>
+  <text x="36" y="320" font-family="sans-serif" font-size="15" fill="#4f4a40">Snippet from Mara:</text>
+  <rect x="36" y="338" width="316" height="64" rx="10" fill="#f3ecdc"/>
+  <text x="50" y="366" font-family="monospace" font-size="13" fill="#6e675c">git rebase -i HEAD~3</text>
+  <text x="50" y="388" font-family="monospace" font-size="13" fill="#6e675c">  # squash the fixups</text>
+  <!-- caret -->
+  <rect x="36" y="430" width="3" height="22" rx="1.5" fill="#f08c42"/>
+
+  <!-- hotkey hint pinned bottom of panel -->
+  <rect x="36" y="730" width="316" height="40" rx="10" fill="#f3ecdc"/>
+  <text x="50" y="755" font-family="monospace" font-size="13" fill="#6e675c">⌘⇧⌥N to toggle  ·  ⌘K to switch</text>
+
+  <!-- a faint app window peeking on the desktop behind -->
+  <rect x="470" y="150" width="720" height="520" rx="18" fill="#ffffff" fill-opacity="0.05"/>
+  <rect x="470" y="150" width="720" height="44" rx="18" fill="#ffffff" fill-opacity="0.06"/>
+  <circle cx="498" cy="172" r="6" fill="#ff6b5d"/>
+  <circle cx="520" cy="172" r="6" fill="#ffc14d"/>
+  <circle cx="542" cy="172" r="6" fill="#2cc9b5"/>
+</svg>

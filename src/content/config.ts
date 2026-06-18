@@ -20,6 +20,40 @@ const apps = defineCollection({
     accent: z.enum(['tangerine', 'magenta', 'golden', 'teal']).default('tangerine'),
     published: z.boolean().default(true),
     releaseDate: z.date(),
+
+    // --- Marketing page ---
+    // One- or two-sentence opener (the lead line of the App Store description).
+    pitch: z.string().optional(),
+    // Feature blocks rendered as a grid on the marketing page.
+    features: z
+      .array(
+        z.object({
+          icon: z.enum([
+            'hotkey',
+            'edge',
+            'switcher',
+            'richtext',
+            'lock',
+            'bolt',
+            'sparkles',
+            'sync',
+          ]),
+          title: z.string(),
+          description: z.string(),
+        })
+      )
+      .default([]),
+
+    // --- Support page (per-app) ---
+    supportEmail: z.string().default('support@tess-it.net'),
+    responseTime: z.string().default('1–2 business days'),
+    // Labelled quick-start rows: { label: 'Open', value: '⌘⇧⌥N or …' }.
+    quickStart: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+
+    // --- Privacy ---
+    // Short plain-language summary shown on both support and privacy pages.
+    privacyNote: z.string().optional(),
   }),
 });
 

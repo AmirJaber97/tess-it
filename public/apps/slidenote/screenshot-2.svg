@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="SlideNote quick switcher opened with Command-K">
+  <defs>
+    <linearGradient id="wall2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2440"/>
+      <stop offset="1" stop-color="#3d2740"/>
+    </linearGradient>
+    <filter id="pal-sh" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="40" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="800" fill="url(#wall2)"/>
+  <rect width="1280" height="800" fill="#0e0c16" fill-opacity="0.35"/>
+
+  <!-- command palette -->
+  <g filter="url(#pal-sh)">
+    <rect x="340" y="180" width="600" height="404" rx="20" fill="#201d2b"/>
+  </g>
+  <!-- search row -->
+  <text x="372" y="238" font-family="monospace" font-size="16" fill="#ffc14d">⌘K</text>
+  <text x="420" y="238" font-family="sans-serif" font-size="18" fill="#f4efe4">stand</text>
+  <rect x="476" y="222" width="2" height="22" rx="1" fill="#ffc14d"/>
+  <rect x="340" y="262" width="600" height="1" fill="#332f40"/>
+
+  <!-- results -->
+  <g font-family="sans-serif">
+    <rect x="356" y="280" width="568" height="52" rx="10" fill="#ffc14d" fill-opacity="0.16"/>
+    <text x="380" y="312" font-size="16" font-weight="600" fill="#f4efe4">Standup notes</text>
+    <text x="900" y="312" font-size="12" font-family="monospace" fill="#a39daf" text-anchor="end">↵</text>
+
+    <text x="380" y="368" font-size="16" fill="#cfc9d8">Standards &amp; specs</text>
+    <text x="900" y="368" font-size="12" font-family="monospace" fill="#6e675c" text-anchor="end">2d</text>
+
+    <text x="380" y="420" font-size="16" fill="#cfc9d8">Outstanding bugs</text>
+    <text x="900" y="420" font-size="12" font-family="monospace" fill="#6e675c" text-anchor="end">5d</text>
+
+    <text x="380" y="472" font-size="16" fill="#cfc9d8">Grocery standby list</text>
+    <text x="900" y="472" font-size="12" font-family="monospace" fill="#6e675c" text-anchor="end">1w</text>
+  </g>
+
+  <!-- footer hint -->
+  <rect x="340" y="528" width="600" height="56" rx="0" fill="#1a1722"/>
+  <text x="372" y="562" font-family="monospace" font-size="12" fill="#a39daf">↑↓ navigate   ↵ open   ⌘T new note   esc close</text>
+</svg>

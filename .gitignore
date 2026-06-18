@@ -7,6 +7,9 @@ dist/
 # dependencies
 node_modules/
 
+# corrupted node_modules orphan (filesystem damage; remove with `chkdsk F: /f`)
+_nm_corrupt/
+
 # logs
 npm-debug.log*
 yarn-debug.log*

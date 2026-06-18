@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const apps = await getCollection('apps', ({ data }) => data.published);
@@ -11,45 +11,47 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const appSlug = entry.data.slug ?? entry.slug;
-const { name, icon, accent } = entry.data;
+const slug = entry.data.slug ?? entry.slug;
+const { name, icon, accent, supportEmail, privacyNote } = entry.data;
 
 const lastUpdated = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(
   entry.data.releaseDate
 );
 
-// Placeholder policy sections — replace with each app's real policy.
+const summary =
+  privacyNote ??
+  `${name} does not collect, store, or transmit any personal information. There are no accounts, no analytics, and no tracking.`;
+
+// Sections accurate for a local-first, no-data app. Edit per app if a
+// future app behaves differently.
 const sections = [
   {
     title: 'What gets collected',
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. ${name} does not collect, store, or transmit any personal information. There are no accounts, no tracking, and no third-party analytics SDKs.`,
+    body: `Nothing. ${name} has no analytics, no advertising SDKs, no crash trackers, and no accounts. It never sends your content anywhere.`,
   },
   {
-    title: 'Data that stays on your device',
-    body: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem. Your sessions, settings, and statistics are stored locally on your device. If you enable iCloud sync, that data is stored in your personal iCloud account, which I cannot access.',
+    title: 'Where your data lives',
+    body: `Your notes and settings are stored locally on your device. They are yours — easy to back up, and impossible for me or anyone else to read remotely.`,
   },
   {
     title: 'Purchases',
-    body: 'Ut enim ad minima veniam, quis nostrum exercitationem. Payments are processed entirely by Apple. I receive anonymized sales reports and never see your payment details.',
+    body: `If ${name} is paid or offers in-app purchases, payments are handled entirely by Apple. I receive anonymized sales figures and never see your payment details.`,
   },
   {
     title: 'Changes to this policy',
-    body: 'Quis autem vel eum iure reprehenderit qui in ea voluptate. If this policy ever changes, the date above will be updated and meaningful changes will be called out in the App Store release notes.',
+    body: `If this policy ever changes, the date above will be updated and any meaningful change will be noted in the App Store release notes.`,
   },
   {
     title: 'Contact',
-    body: 'Questions about privacy? Email privacy@tess-it.net and I will get back to you.',
+    body: `Questions about privacy? Email ${supportEmail} and I’ll get back to you.`,
   },
 ];
 ---
 
-<BaseLayout
-  title={`${name} Privacy Policy — Tess It`}
-  description={`Privacy policy for ${name}.`}
->
+<BaseLayout title={`${name} Privacy Policy — Tess It`} description={`Privacy policy for ${name}.`}>
   <div class="mx-auto max-w-2xl px-6 pt-12" style={`--app-accent: var(--su-${accent})`}>
     <a
-      href={`/apps/${appSlug}/`}
+      href={`/${slug}/`}
       class="inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.14em] text-ink-muted transition-colors hover:text-ink"
     >
       <img
@@ -58,7 +60,7 @@ const sections = [
         width="24"
         height="24"
         class="size-6 rounded-md"
-        transition:name={`app-icon-${appSlug}`}
+        transition:name={`app-icon-${slug}`}
       />
       ← {name}
     </a>
@@ -72,10 +74,7 @@ const sections = [
     <!-- The answer most visitors came for, up front. -->
     <div class="tldr mt-8 rounded-2xl border border-line bg-surface p-6 sm:p-7">
       <p class="eyebrow">The short version</p>
-      <p class="mt-3 leading-relaxed">
-        {name} collects <strong>nothing</strong>. No accounts, no ads, no analytics, no data
-        leaving your device. The long version below exists because lawyers like long versions.
-      </p>
+      <p class="mt-3 leading-relaxed">{summary}</p>
     </div>
 
     <div class="mt-6">
@@ -91,7 +90,7 @@ const sections = [
 
     <p class="mt-14 font-mono text-xs text-ink-muted">
       Need help instead? Visit <a
-        href={`/apps/${appSlug}/support/`}
+        href={`/${slug}/support/`}
         class="text-accent underline underline-offset-4">{name} support</a
       >.
     </p>

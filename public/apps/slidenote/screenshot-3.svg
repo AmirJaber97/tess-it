@@ -1,53 +1,84 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="A SlideNote note with rich text formatting">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="SlideNote in its light theme with a checklist note open">
   <defs>
     <linearGradient id="wall3" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#2a2440"/>
       <stop offset="1" stop-color="#3d2740"/>
     </linearGradient>
-    <filter id="win-sh" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="20" stdDeviation="34" flood-color="#000" flood-opacity="0.4"/>
+    <filter id="win3-sh" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="14" dy="10" stdDeviation="30" flood-color="#000" flood-opacity="0.4"/>
     </filter>
   </defs>
+
   <rect width="1280" height="800" fill="url(#wall3)"/>
 
-  <!-- centered note window -->
-  <g filter="url(#win-sh)">
-    <rect x="300" y="120" width="680" height="560" rx="22" fill="#fbf5ea"/>
+  <g filter="url(#win3-sh)" font-family="-apple-system, Segoe UI, sans-serif">
+    <rect x="44" y="60" width="712" height="680" rx="22" fill="#ededec"/>
+
+    <!-- title bar -->
+    <text x="76" y="108" font-size="18" font-weight="700" fill="#222">Trip planning</text>
+    <g transform="translate(556 86)" fill="none" stroke="#8a8a8a" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round">
+      <rect x="0" y="0" width="172" height="34" rx="9" fill="#e1e1e0" stroke="none"/>
+      <path d="M14 22l-3 1 1-3 9-9 2 2-9 9z"/>
+      <path d="M46 9h8 M48 9l1 6 M52 9l-1 6 M47 15h6 M50 15v5"/>
+      <path d="M84 9v12M78 15h12"/>
+      <path d="M116 11h16M116 16h16M116 21h16"/>
+      <path d="M150 10h14M153 10l1-2h6l1 2M152 10v13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V10"/>
+    </g>
+
+    <!-- tab strip -->
+    <g font-size="11.5" fill="#6a6a6a">
+      <rect x="72" y="128" width="96" height="22" rx="11" fill="#e1e1e0"/>
+      <text x="120" y="143" text-anchor="middle">Standup notes</text>
+      <rect x="174" y="128" width="92" height="22" rx="11" fill="#fbe6b8"/>
+      <text x="220" y="143" text-anchor="middle" fill="#8a6212" font-weight="600">Trip planning</text>
+      <rect x="272" y="128" width="64" height="22" rx="11" fill="#e1e1e0"/>
+      <text x="304" y="143" text-anchor="middle">Untitled</text>
+      <rect x="342" y="128" width="88" height="22" rx="11" fill="#e1e1e0"/>
+      <text x="386" y="143" text-anchor="middle">Reading list</text>
+      <rect x="436" y="128" width="60" height="22" rx="11" fill="#e1e1e0"/>
+      <text x="466" y="143" text-anchor="middle">Recipes</text>
+      <rect x="502" y="128" width="92" height="22" rx="11" fill="#e1e1e0"/>
+      <text x="548" y="143" text-anchor="middle">Project ideas</text>
+      <rect x="600" y="128" width="60" height="22" rx="11" fill="#e1e1e0"/>
+      <text x="630" y="143" text-anchor="middle">Journal</text>
+    </g>
+
+    <!-- formatting toolbar -->
+    <g font-size="13" fill="#5a5a5a">
+      <text x="76" y="180" font-weight="800" fill="#222">B</text>
+      <text x="96" y="180" font-style="italic">I</text>
+      <text x="112" y="180" text-decoration="underline">U</text>
+      <line x1="130" y1="170" x2="130" y2="182" stroke="#cfcfce"/>
+      <text x="142" y="180">A</text>
+      <text x="166" y="180" font-family="monospace" font-size="12">14pt</text>
+      <text x="206" y="181" font-size="15">A</text>
+      <text x="226" y="180" font-size="14">↺</text>
+      <circle cx="724" cy="175" r="9" fill="none" stroke="#b4b4b4"/>
+      <text x="724" y="180" text-anchor="middle" font-size="12" fill="#b4b4b4" font-style="italic">i</text>
+    </g>
+
+    <!-- note body: checklist -->
+    <text x="76" y="232" font-size="24" font-weight="800" fill="#222">Lisbon — packing</text>
+    <g font-size="15">
+      <!-- checked -->
+      <rect x="76" y="258" width="16" height="16" rx="4" fill="#1e9e8e"/>
+      <path d="M80 266l3 3 5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="104" y="271" fill="#8a8a8a" text-decoration="line-through">Passport &amp; boarding passes</text>
+
+      <rect x="76" y="292" width="16" height="16" rx="4" fill="#1e9e8e"/>
+      <path d="M80 300l3 3 5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="104" y="305" fill="#8a8a8a" text-decoration="line-through">Travel adapter</text>
+
+      <rect x="76" y="326" width="16" height="16" rx="4" fill="none" stroke="#b4b4b4" stroke-width="1.6"/>
+      <text x="104" y="339" fill="#2a2a2a">Sunscreen</text>
+
+      <rect x="76" y="360" width="16" height="16" rx="4" fill="none" stroke="#b4b4b4" stroke-width="1.6"/>
+      <text x="104" y="373" fill="#2a2a2a">Camera + spare battery</text>
+
+      <rect x="76" y="394" width="16" height="16" rx="4" fill="none" stroke="#b4b4b4" stroke-width="1.6"/>
+      <text x="104" y="407" fill="#2a2a2a">Download offline maps</text>
+    </g>
+    <rect x="104" y="424" width="3" height="20" fill="#f0a93b"/>
   </g>
-  <!-- title bar with formatting toolbar -->
-  <rect x="300" y="120" width="680" height="52" rx="22" fill="#f3ecdc"/>
-  <rect x="300" y="150" width="680" height="22" fill="#f3ecdc"/>
-  <circle cx="328" cy="146" r="6" fill="#ff6b5d"/>
-  <circle cx="350" cy="146" r="6" fill="#ffc14d"/>
-  <circle cx="372" cy="146" r="6" fill="#2cc9b5"/>
-  <g font-family="sans-serif" font-size="15" fill="#6e675c">
-    <text x="430" y="151" font-weight="800" fill="#221f1a">B</text>
-    <text x="462" y="151" font-style="italic">I</text>
-    <text x="490" y="151" text-decoration="underline">U</text>
-    <text x="528" y="151" font-family="monospace">H1</text>
-    <text x="568" y="151" font-family="monospace">•</text>
-    <text x="598" y="151" font-family="monospace">1.</text>
-    <text x="636" y="151" font-family="monospace">‹/›</text>
-  </g>
-
-  <!-- formatted content -->
-  <text x="340" y="232" font-family="sans-serif" font-size="30" font-weight="800" fill="#221f1a">Launch checklist</text>
-  <text x="340" y="280" font-family="sans-serif" font-size="16" fill="#4f4a40">A few things to lock down before <tspan font-weight="700" fill="#221f1a">submission day</tspan>:</text>
-
-  <g font-family="sans-serif" font-size="16" fill="#4f4a40">
-    <circle cx="348" cy="322" r="4" fill="#f08c42"/>
-    <text x="368" y="328">Final pass on the marketing copy</text>
-    <circle cx="348" cy="360" r="4" fill="#f08c42"/>
-    <text x="368" y="366">Screenshots at every required size</text>
-    <circle cx="348" cy="398" r="4" fill="#f08c42"/>
-    <text x="368" y="404">Support &amp; privacy URLs live</text>
-  </g>
-
-  <text x="340" y="470" font-family="sans-serif" font-size="20" font-weight="700" fill="#221f1a">Notes</text>
-  <text x="340" y="506" font-family="sans-serif" font-size="16" fill="#4f4a40">Keep the description’s opening line punchy —</text>
-  <text x="340" y="532" font-family="sans-serif" font-size="16" fill="#4f4a40">it doubles as the site’s pitch.</text>
-
-  <rect x="340" y="560" width="600" height="60" rx="10" fill="#f3ecdc"/>
-  <text x="356" y="588" font-family="monospace" font-size="13" fill="#6e675c">defaults write net.tess-it.SlideNote edgeTrigger -bool true</text>
-  <text x="356" y="608" font-family="monospace" font-size="13" fill="#9a8f7a"># opt back into the edge trigger</text>
 </svg>

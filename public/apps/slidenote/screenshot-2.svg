@@ -1,43 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="SlideNote quick switcher opened with Command-K">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="SlideNote in its dark theme with a note open">
   <defs>
     <linearGradient id="wall2" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#2a2440"/>
       <stop offset="1" stop-color="#3d2740"/>
     </linearGradient>
-    <filter id="pal-sh" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="24" stdDeviation="40" flood-color="#000" flood-opacity="0.45"/>
+    <filter id="win2-sh" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="14" dy="10" stdDeviation="30" flood-color="#000" flood-opacity="0.5"/>
     </filter>
   </defs>
+
   <rect width="1280" height="800" fill="url(#wall2)"/>
-  <rect width="1280" height="800" fill="#0e0c16" fill-opacity="0.35"/>
 
-  <!-- command palette -->
-  <g filter="url(#pal-sh)">
-    <rect x="340" y="180" width="600" height="404" rx="20" fill="#201d2b"/>
+  <g filter="url(#win2-sh)" font-family="-apple-system, Segoe UI, sans-serif">
+    <rect x="44" y="60" width="712" height="680" rx="22" fill="#1b1825"/>
+
+    <!-- title bar -->
+    <text x="76" y="108" font-size="18" font-weight="700" fill="#f4efe4">Reading list</text>
+    <g transform="translate(556 86)" fill="none" stroke="#8e86a0" stroke-width="1.6"
+       stroke-linecap="round" stroke-linejoin="round">
+      <rect x="0" y="0" width="172" height="34" rx="9" fill="#2a2638" stroke="none"/>
+      <path d="M14 22l-3 1 1-3 9-9 2 2-9 9z"/>
+      <path d="M46 9h8 M48 9l1 6 M52 9l-1 6 M47 15h6 M50 15v5"/>
+      <path d="M84 9v12M78 15h12"/>
+      <path d="M116 11h16M116 16h16M116 21h16"/>
+      <path d="M150 10h14M153 10l1-2h6l1 2M152 10v13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V10"/>
+    </g>
+
+    <!-- tab strip -->
+    <g font-size="11.5" fill="#a79ec0">
+      <rect x="72" y="128" width="96" height="22" rx="11" fill="#2a2638"/>
+      <text x="120" y="143" text-anchor="middle">Standup notes</text>
+      <rect x="174" y="128" width="88" height="22" rx="11" fill="#3a2e1a"/>
+      <text x="218" y="143" text-anchor="middle" fill="#ffc870" font-weight="600">Reading list</text>
+      <rect x="268" y="128" width="64" height="22" rx="11" fill="#2a2638"/>
+      <text x="300" y="143" text-anchor="middle">Untitled</text>
+      <rect x="338" y="128" width="60" height="22" rx="11" fill="#2a2638"/>
+      <text x="368" y="143" text-anchor="middle">Recipes</text>
+      <rect x="404" y="128" width="92" height="22" rx="11" fill="#2a2638"/>
+      <text x="450" y="143" text-anchor="middle">Trip planning</text>
+      <rect x="502" y="128" width="92" height="22" rx="11" fill="#2a2638"/>
+      <text x="548" y="143" text-anchor="middle">Project ideas</text>
+      <rect x="600" y="128" width="60" height="22" rx="11" fill="#2a2638"/>
+      <text x="630" y="143" text-anchor="middle">Journal</text>
+    </g>
+
+    <!-- formatting toolbar -->
+    <g font-size="13" fill="#b8b0c8">
+      <text x="76" y="180" font-weight="800" fill="#f4efe4">B</text>
+      <text x="96" y="180" font-style="italic">I</text>
+      <text x="112" y="180" text-decoration="underline">U</text>
+      <line x1="130" y1="170" x2="130" y2="182" stroke="#3a3550"/>
+      <text x="142" y="180">A</text>
+      <text x="166" y="180" font-family="monospace" font-size="12">14pt</text>
+      <text x="206" y="181" font-size="15">A</text>
+      <text x="226" y="180" font-size="14">↺</text>
+      <circle cx="724" cy="175" r="9" fill="none" stroke="#5a5470"/>
+      <text x="724" y="180" text-anchor="middle" font-size="12" fill="#5a5470" font-style="italic">i</text>
+    </g>
+
+    <!-- note body: rich text -->
+    <text x="76" y="232" font-size="24" font-weight="800" fill="#f4efe4">To read next</text>
+    <g font-size="15" fill="#cfc8de">
+      <circle cx="84" cy="270" r="3.5" fill="#ffc870"/>
+      <text x="100" y="275">A Philosophy of Software Design</text>
+      <circle cx="84" cy="304" r="3.5" fill="#ffc870"/>
+      <text x="100" y="309">The Pragmatic Programmer</text>
+      <circle cx="84" cy="338" r="3.5" fill="#ffc870"/>
+      <text x="100" y="343">Shape Up — Basecamp</text>
+    </g>
+    <text x="76" y="392" font-size="15" fill="#9a93ac">Currently reading: <tspan fill="#f4efe4" font-weight="600">Refactoring UI</tspan></text>
+    <rect x="76" y="410" width="3" height="20" fill="#ffc870"/>
   </g>
-  <!-- search row -->
-  <text x="372" y="238" font-family="monospace" font-size="16" fill="#ffc14d">⌘K</text>
-  <text x="420" y="238" font-family="sans-serif" font-size="18" fill="#f4efe4">stand</text>
-  <rect x="476" y="222" width="2" height="22" rx="1" fill="#ffc14d"/>
-  <rect x="340" y="262" width="600" height="1" fill="#332f40"/>
-
-  <!-- results -->
-  <g font-family="sans-serif">
-    <rect x="356" y="280" width="568" height="52" rx="10" fill="#ffc14d" fill-opacity="0.16"/>
-    <text x="380" y="312" font-size="16" font-weight="600" fill="#f4efe4">Standup notes</text>
-    <text x="900" y="312" font-size="12" font-family="monospace" fill="#a39daf" text-anchor="end">↵</text>
-
-    <text x="380" y="368" font-size="16" fill="#cfc9d8">Standards &amp; specs</text>
-    <text x="900" y="368" font-size="12" font-family="monospace" fill="#6e675c" text-anchor="end">2d</text>
-
-    <text x="380" y="420" font-size="16" fill="#cfc9d8">Outstanding bugs</text>
-    <text x="900" y="420" font-size="12" font-family="monospace" fill="#6e675c" text-anchor="end">5d</text>
-
-    <text x="380" y="472" font-size="16" fill="#cfc9d8">Grocery standby list</text>
-    <text x="900" y="472" font-size="12" font-family="monospace" fill="#6e675c" text-anchor="end">1w</text>
-  </g>
-
-  <!-- footer hint -->
-  <rect x="340" y="528" width="600" height="56" rx="0" fill="#1a1722"/>
-  <text x="372" y="562" font-family="monospace" font-size="12" fill="#a39daf">↑↓ navigate   ↵ open   ⌘T new note   esc close</text>
 </svg>

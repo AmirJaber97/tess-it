@@ -1,0 +1,42 @@
+---
+// Apple App Store download badge, facsimile built to theme with the site.
+// When `url` is absent (app not yet approved) it renders a non-link
+// "coming soon" state instead of a dead button.
+interface Props {
+  url?: string;
+  store?: 'mac' | 'ios';
+}
+const { url, store = 'mac' } = Astro.props;
+const label = store === 'mac' ? 'Mac App Store' : 'App Store';
+const lead = url ? 'Download on the' : 'Coming soon to the';
+const Tag = url ? 'a' : 'div';
+---
+
+<Tag
+  {...url ? { href: url, rel: 'noopener' } : { 'aria-disabled': 'true' }}
+  class:list={[
+    'badge inline-flex items-center gap-3 rounded-xl border px-4 py-2.5',
+    url
+      ? 'border-ink bg-ink text-bg transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_-14px_var(--app-accent,currentColor)] active:scale-[0.97]'
+      : 'cursor-default border-line bg-surface text-ink-muted',
+  ]}
+>
+  <svg viewBox="0 0 24 24" class="size-7 shrink-0" fill="currentColor" aria-hidden="true">
+    <path
+      d="M17.05 20.28c-.96.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09v-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"
+    ></path>
+  </svg>
+  <span class="flex flex-col items-start leading-tight">
+    <span class="text-[0.65rem] font-medium">{lead}</span>
+    <span class="font-display text-lg font-semibold tracking-tight">{label}</span>
+  </span>
+  {
+    !url && (
+      <span
+        class="ml-1 size-2 shrink-0 rounded-full"
+        style="background: var(--app-accent, currentColor)"
+        aria-hidden="true"
+      />
+    )
+  }
+</Tag>

@@ -1,0 +1,276 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
+import AppStoreBadge from '../components/AppStoreBadge.astro';
+import SlideOutDemo from '../components/SlideOutDemo.astro';
+
+export async function getStaticPaths() {
+  const apps = await getCollection('apps', ({ data }) => data.published);
+  return apps.map((entry) => ({
+    params: { slug: entry.data.slug ?? entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const slug = entry.data.slug ?? entry.slug;
+const { name, tagline, pitch, icon, screenshots, accent, platforms, features, releaseDate } =
+  entry.data;
+const { appStoreUrl } = entry.data;
+const { Content } = await entry.render();
+
+const platformLabels: Record<string, string> = {
+  ios: 'iOS',
+  android: 'Android',
+  web: 'Web',
+  windows: 'Windows',
+  macos: 'macOS',
+  linux: 'Linux',
+};
+const store = platforms.includes('macos') ? 'mac' : 'ios';
+const showBadge = platforms.includes('macos') || platforms.includes('ios');
+const meta = [
+  platforms.map((p) => platformLabels[p]).join(' · '),
+  `Released ${new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(releaseDate)}`,
+]
+  .filter(Boolean)
+  .join('  ·  ');
+---
+
+<BaseLayout title={`${name} — Tess It`} description={entry.data.description}>
+  <div style={`--app-accent: var(--su-${accent})`}>
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="app-glow" aria-hidden="true"></div>
+
+      <div class="mx-auto max-w-5xl px-6 pb-12 pt-12 sm:pt-16">
+        <a
+          href="/#apps"
+          class="font-mono text-xs uppercase tracking-[0.14em] text-ink-muted transition-colors hover:text-ink"
+        >
+          ← All apps
+        </a>
+
+        <div class="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8">
+          <img
+            src={icon}
+            alt=""
+            width="112"
+            height="112"
+            class="size-24 rounded-[26px] shadow-lg sm:size-28"
+            transition:name={`app-icon-${slug}`}
+          />
+          <div>
+            <h1 class="font-display text-4xl font-medium tracking-tight sm:text-5xl">{name}</h1>
+            <p class="mt-3 max-w-md text-lg leading-relaxed text-ink-muted">{tagline}</p>
+          </div>
+        </div>
+
+        {
+          pitch && (
+            <p class="mt-10 max-w-2xl font-display text-xl leading-relaxed tracking-tight sm:text-2xl">
+              {pitch}
+            </p>
+          )
+        }
+
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+          {showBadge && <AppStoreBadge url={appStoreUrl} store={store} />}
+          <p class="eyebrow">{meta}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    {
+      features.length > 0 && (
+        <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24">
+          <p class="eyebrow reveal">Features</p>
+          <h2 class="heading-rule reveal mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl">
+            Everything within reach
+          </h2>
+          <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((f, i) => (
+              <div
+                class="feature-card reveal rounded-2xl border border-line bg-surface p-6"
+                style={`--reveal-delay: ${i * 80}ms`}
+              >
+                <span class="feature-ico inline-flex rounded-xl p-2.5">
+                  <FeatureIcon name={f.icon} class="size-6" />
+                </span>
+                <h3 class="mt-4 font-display text-lg font-medium tracking-tight">{f.title}</h3>
+                <p class="mt-1.5 text-sm leading-relaxed text-ink-muted">{f.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Slide-out demo -->
+    <section class="mx-auto max-w-5xl px-6 pt-24 sm:pt-32">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div class="reveal">
+          <p class="eyebrow">In motion</p>
+          <h2
+            class="heading-rule mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl"
+          >
+            One keystroke away
+          </h2>
+          <p class="mt-6 max-w-md leading-relaxed text-ink-muted">
+            Press the hotkey or brush the edge of the screen and {name} slides in over whatever you’re
+            doing. Jot the thought, then send it back with the same gesture — your work never moves.
+          </p>
+        </div>
+        <div class="reveal" style="--reveal-delay: 100ms">
+          <SlideOutDemo />
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots -->
+    {
+      screenshots && screenshots.length > 0 && (
+        <section class="reveal mt-24 sm:mt-32" aria-label={`${name} screenshots`}>
+          <div
+            class="screenshot-rail mx-auto flex max-w-6xl snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4"
+            tabindex="0"
+            role="region"
+            aria-label="Screenshots, scroll horizontally"
+          >
+            {screenshots.map((src, i) => (
+              <img
+                src={src}
+                alt={`${name} screenshot ${i + 1}`}
+                width="1280"
+                height="800"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                class="aspect-[16/10] w-[min(85vw,640px)] shrink-0 snap-center rounded-2xl border border-line bg-surface"
+              />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Story / description -->
+    <section class="reveal mx-auto max-w-3xl px-6 pt-24 sm:pt-32">
+      <h2 class="heading-rule font-display text-2xl font-medium tracking-tight sm:text-3xl">
+        The story
+      </h2>
+      <article class="app-prose mt-8">
+        <Content />
+      </article>
+    </section>
+
+    <!-- Support / Privacy (page footer links) -->
+    <section class="mx-auto max-w-3xl px-6 pt-16">
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href={`/${slug}/support/`} class="helper-card group">
+          <p class="eyebrow">Support</p>
+          <p class="mt-2 font-display text-lg font-medium">
+            Need a hand with {name}?
+            <span class="text-accent transition-transform group-hover:translate-x-0.5">→</span>
+          </p>
+        </a>
+        <a href={`/${slug}/privacy/`} class="helper-card group">
+          <p class="eyebrow">Privacy</p>
+          <p class="mt-2 font-display text-lg font-medium">
+            What this app knows about you
+            <span class="text-accent transition-transform group-hover:translate-x-0.5">→</span>
+          </p>
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .app-glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(560px 320px at 18% 0%, var(--app-accent), transparent 70%);
+    opacity: 0.12;
+  }
+  :global(.dark) .app-glow {
+    opacity: 0.16;
+  }
+
+  .feature-ico {
+    color: var(--app-accent);
+    background: color-mix(in srgb, var(--app-accent) 12%, transparent);
+  }
+
+  .feature-card {
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--app-accent);
+  }
+
+  .screenshot-rail {
+    scrollbar-width: thin;
+    scrollbar-color: var(--su-border) transparent;
+  }
+
+  .heading-rule {
+    position: relative;
+    padding-bottom: 0.85rem;
+  }
+  .heading-rule::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 56px;
+    border-radius: 2px;
+    background: var(--app-accent);
+  }
+
+  .helper-card {
+    display: block;
+    border-radius: 1rem;
+    border: 1px solid var(--su-border);
+    background: var(--su-surface);
+    padding: 1.25rem 1.5rem;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .helper-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--app-accent);
+  }
+  .helper-card:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  .app-prose :global(p) {
+    margin-top: 1rem;
+    line-height: 1.75;
+    color: var(--su-ink-muted);
+  }
+  .app-prose :global(h2) {
+    margin-top: 2.5rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--su-ink);
+  }
+  .app-prose :global(em) {
+    color: var(--su-ink);
+    font-style: italic;
+  }
+  .app-prose :global(a) {
+    color: var(--su-accent-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>

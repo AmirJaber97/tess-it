@@ -2,9 +2,73 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="About | Tess It">
-  <main class="mx-auto max-w-3xl p-6">
-    <h1 class="mb-6 text-3xl font-bold">About Tess It</h1>
-    <p>Placeholder about page for Tess It.</p>
-  </main>
+<BaseLayout
+  title="About — Tess It"
+  description="tess-it is where Emir builds his own small, carefully made apps for Mac, mobile, and the web."
+>
+  <div class="mx-auto max-w-2xl px-6 pt-12">
+    <p class="eyebrow">About</p>
+    <h1 class="heading-rule mt-3 font-display text-3xl font-medium tracking-tight sm:text-4xl">
+      Hi, I&rsquo;m Emir
+    </h1>
+
+    <div class="about-prose mt-8">
+      <p>
+        I&rsquo;m a developer from Ukraine. I&rsquo;ve spent over a decade building commercial
+        software &mdash; seventeen projects across mobile, web, and desktop, mostly with Flutter.
+      </p>
+      <p>
+        <strong>tess-it</strong> is where I build my own apps: small, useful tools that respect your
+        time, privacy, and attention. Fast to open, quiet by default, and local-first wherever it
+        makes sense &mdash; no accounts you didn&rsquo;t ask for, no data leaving your device.
+      </p>
+      <p>
+        It isn&rsquo;t an agency, and I&rsquo;m not for hire. It&rsquo;s a studio of one, shipping a
+        small, carefully made catalog of apps for Mac, mobile, and the web &mdash; the kind of tools
+        I want to use myself.
+      </p>
+      <p>
+        Have a question or an idea? <a href="/contact/">Get in touch</a> &mdash; I read everything.
+      </p>
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .heading-rule {
+    position: relative;
+    padding-bottom: 0.85rem;
+  }
+  .heading-rule::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 64px;
+    border-radius: 2px;
+    background: linear-gradient(
+      to right,
+      var(--su-tangerine) 0 25%,
+      var(--su-magenta) 25% 50%,
+      var(--su-golden) 50% 75%,
+      var(--su-teal) 75% 100%
+    );
+  }
+
+  .about-prose p {
+    margin-top: 1.1rem;
+    line-height: 1.75;
+    color: var(--su-ink-muted);
+  }
+  .about-prose strong {
+    color: var(--su-ink);
+    font-weight: 600;
+  }
+  .about-prose a {
+    color: var(--su-accent-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s;
+  }
+</style>

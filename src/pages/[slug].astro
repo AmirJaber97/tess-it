@@ -30,10 +30,13 @@ const platformLabels: Record<string, string> = {
 };
 const store = platforms.includes('macos') ? 'mac' : 'ios';
 const showBadge = platforms.includes('macos') || platforms.includes('ios');
-const meta = [
-  platforms.map((p) => platformLabels[p]).join(' · '),
-  `Released ${new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(releaseDate)}`,
-]
+// "Released …" only once there's a live store link; otherwise it's unreleased,
+// so the badge ("Coming soon") and this line must agree.
+const launched = Boolean(appStoreUrl || entry.data.playStoreUrl);
+const statusLabel = launched
+  ? `Released ${new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(releaseDate)}`
+  : 'Coming soon';
+const meta = [platforms.map((p) => platformLabels[p]).join(' · '), statusLabel]
   .filter(Boolean)
   .join('  ·  ');
 ---

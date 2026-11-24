@@ -65,6 +65,7 @@ privacyNote: Short plain-language summary shown on the support and privacy pages
 | :-- | :-- |
 | Hero headline, tagline, CTA buttons | `src/pages/index.astro` |
 | About snippet on the landing page | `src/pages/index.astro` |
+| Work with me page (offers, recent work, how I work) | `src/pages/work.astro` |
 | Footer links (email, GitHub, App Store) | `src/layouts/BaseLayout.astro` |
 | Site-wide default title/description | `src/layouts/BaseLayout.astro` |
 | An app's marketing / support / privacy content | that app's `*.mdx` frontmatter |

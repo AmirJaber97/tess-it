@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const mail = 'mailto:hello@tess-it.net?subject=Project%20inquiry';
+
+const offers = [
+  {
+    accent: 'tangerine',
+    title: 'Apps that talk to hardware',
+    body: 'Flutter apps for iOS, Android, macOS and Windows that connect to devices over Bluetooth LE, USB or Wi-Fi, including custom binary and protobuf protocols.',
+    label: 'By project',
+  },
+  {
+    accent: 'magenta',
+    title: 'A first version in a week',
+    body: 'A clickable demo or first version of your app, web or Flutter, so you can show it to customers or investors before the backend exists.',
+    label: 'About a week',
+  },
+  {
+    accent: 'golden',
+    title: 'Internal tools and CRMs',
+    body: 'A client list, bookings, reports and roles for a small business, built around how you already work.',
+    label: '1–2 weeks',
+  },
+  {
+    accent: 'teal',
+    title: 'Bots and booking pages',
+    body: 'A Telegram bot or an online booking page for a clinic, a salon or any business that takes appointments.',
+    label: '2–4 days',
+  },
+];
+
+const how = [
+  {
+    title: 'Fixed scope, fixed price',
+    body: 'Small projects get a clear scope and one price before I start.',
+  },
+  {
+    title: 'Something to see every week',
+    body: 'Larger projects get a working demo every week, so there are no surprises at the end.',
+  },
+  {
+    title: 'Tested and handed over',
+    body: 'Every delivery comes with tests and a written handoff, so your team can take it from there.',
+  },
+  {
+    title: 'Fast, with my review on everything',
+    body: 'I work with AI coding agents under my own review. That is why a first version takes days instead of weeks.',
+  },
+];
+
+const linkClass =
+  'font-medium text-accent underline decoration-2 underline-offset-4 transition-colors hover:decoration-magenta';
+---
+
+<BaseLayout
+  title="Work with me — Tess It"
+  description="Emir takes on a small number of client projects: Flutter apps for mobile and desktop, apps that talk to hardware, dashboards, and first versions you can show in days."
+>
+  <!-- Top -->
+  <section class="mx-auto max-w-5xl px-6 pb-8 pt-16 sm:pb-12 sm:pt-24">
+    <p class="eyebrow hero-enter">Work with me</p>
+    <h1
+      class="hero-enter mt-5 max-w-4xl font-display text-4xl font-medium leading-[1.08] tracking-tight sm:text-6xl"
+      style="--enter-delay: 90ms"
+    >
+      Your app, <span class="text-accent">carefully made</span> too.
+    </h1>
+    <p
+      class="hero-enter mt-6 max-w-xl text-lg leading-relaxed text-ink-muted"
+      style="--enter-delay: 180ms"
+    >
+      I&rsquo;m Emir. Alongside my own apps I take on a small number of client projects. Over a
+      decade of commercial work, seventeen projects across mobile, web and desktop, mostly with
+      Flutter.
+    </p>
+    <div class="hero-enter mt-10 flex flex-wrap gap-3" style="--enter-delay: 270ms">
+      <a
+        href={mail}
+        class="rounded-lg bg-tangerine px-5 py-2.5 text-sm font-medium text-[#fffdf7] transition-[translate,scale] duration-200 hover:-translate-y-0.5 active:scale-[0.97] dark:text-[#16141f]"
+      >
+        Tell me what you need
+      </a>
+      <a
+        href="#how"
+        class="rounded-lg border border-line px-5 py-2.5 text-sm font-medium transition-[border-color,scale] duration-200 hover:border-tangerine active:scale-[0.97]"
+      >
+        See how I work
+      </a>
+    </div>
+  </section>
+
+  <!-- What I build -->
+  <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24">
+    <p class="eyebrow reveal">01 / What I build</p>
+    <h2 class="heading-rule reveal mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl">
+      What I can build for you
+    </h2>
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2">
+      {
+        offers.map((o, i) => (
+          <li
+            class="offer-card reveal rounded-2xl border border-line bg-surface p-6 transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1"
+            style={`--app-accent: var(--su-${o.accent}); --reveal-delay: ${i * 90}ms`}
+          >
+            <article class="flex h-full flex-col">
+              <span
+                class="block h-1 w-10 rounded-full"
+                style="background: var(--app-accent)"
+                aria-hidden="true"
+              />
+              <h3 class="mt-5 font-display text-xl font-medium tracking-tight">{o.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-muted">{o.body}</p>
+              <p class="mt-auto pt-4 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink-muted">
+                {o.label}
+              </p>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- Recent work -->
+  <section class="mx-auto max-w-5xl px-6 pt-24 sm:pt-32">
+    <p class="eyebrow reveal">02 / Work</p>
+    <h2 class="heading-rule reveal mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl">
+      Recent work
+    </h2>
+    <ul class="reveal mt-10 divide-y divide-line border-y border-line">
+      <li class="py-8">
+        <h3 class="font-display text-xl font-medium tracking-tight">
+          Companion apps for a hardware product line
+        </h3>
+        <p class="mt-3 max-w-2xl leading-relaxed text-ink-muted">
+          A mobile app that talks to the device over Bluetooth LE and Wi-Fi, a desktop app over USB,
+          and the shared Dart SDK and protocol tooling behind both. Flutter on four platforms.
+          It&rsquo;s under NDA, so I can&rsquo;t name it, but I can walk you through the
+          architecture on a call.
+        </p>
+        <p class="mt-4 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink-muted">
+          Flutter · Dart · Bluetooth LE · USB · protobuf
+        </p>
+      </li>
+      <li class="py-8">
+        <h3 class="font-display text-xl font-medium tracking-tight">
+          A data-delivery dashboard, in two days
+        </h3>
+        <p class="mt-3 max-w-2xl leading-relaxed text-ink-muted">
+          A working front end on a mock API: dataset list, delivery details, a KPI dashboard, alerts
+          you can acknowledge and resolve, and phone and tablet layouts. It shipped with 64 tests
+          and a written API contract for the backend team.
+        </p>
+        <p class="mt-4 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink-muted">
+          React · TypeScript
+        </p>
+      </li>
+      <li class="py-8">
+        <h3 class="font-display text-xl font-medium tracking-tight">My own apps</h3>
+        <p class="mt-3 max-w-2xl leading-relaxed text-ink-muted">
+          SlideNote, a scratchpad that slides in from the edge of your Mac, is on its way to the Mac
+          App Store. I also build small tools I use every day, such as a blackout-schedule app and a
+          prayer-times companion.
+        </p>
+        <p class="mt-3">
+          <a href="/slidenote/" class={linkClass}>See SlideNote →</a>
+        </p>
+        <p class="mt-4 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink-muted">
+          macOS · mobile
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- How I work -->
+  <section id="how" class="mx-auto max-w-5xl scroll-mt-12 px-6 pt-24 sm:pt-32">
+    <p class="eyebrow reveal">03 / How I work</p>
+    <h2 class="heading-rule reveal mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl">
+      How I work
+    </h2>
+    <ul class="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+      {
+        how.map((h, i) => (
+          <li class="reveal" style={`--reveal-delay: ${(i % 2) * 90}ms`}>
+            <h3 class="font-display text-xl font-medium tracking-tight">{h.title}</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-ink-muted">{h.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="reveal mt-10 text-sm text-ink-muted">
+      I work in English, Arabic, Ukrainian and Russian. NDAs are fine.
+    </p>
+  </section>
+
+  <!-- Closing -->
+  <section class="mx-auto max-w-5xl px-6 pt-24 sm:pt-32">
+    <div class="reveal overflow-hidden rounded-2xl border border-line bg-surface">
+      <div class="sunset-stripe h-1" aria-hidden="true"></div>
+      <div class="p-6 sm:p-10">
+        <h2 class="font-display text-3xl font-medium tracking-tight sm:text-4xl">
+          Tell me what you&rsquo;re building
+        </h2>
+        <p class="mt-4 max-w-xl leading-relaxed text-ink-muted">
+          Write to <a href={mail} class={linkClass}>hello@tess-it.net</a> with what you need and when
+          you need it. I read everything.
+        </p>
+        <a
+          href={mail}
+          class="mt-8 inline-block rounded-lg bg-tangerine px-5 py-2.5 text-sm font-medium text-[#fffdf7] transition-[translate,scale] duration-200 hover:-translate-y-0.5 active:scale-[0.97] dark:text-[#16141f]"
+        >
+          Email hello@tess-it.net
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .offer-card:hover {
+    border-color: var(--app-accent);
+    box-shadow: 0 12px 32px -16px var(--app-accent);
+  }
+</style>

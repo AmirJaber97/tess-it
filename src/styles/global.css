@@ -110,6 +110,54 @@
     text-transform: uppercase;
     color: var(--su-ink-muted);
   }
+
+  /* Above-the-fold entrance: pure CSS so it needs no JS and runs on load.
+     The reduced-motion override below swaps it for an opacity fade. */
+  .hero-enter {
+    animation: hero-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--enter-delay, 0s);
+  }
+
+  @keyframes hero-enter {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Section headings get a short sunset underline. On .reveal headings it
+     draws in once revealed (always drawn without JS or without .reveal). */
+  .heading-rule {
+    position: relative;
+    padding-bottom: 0.85rem;
+  }
+
+  .heading-rule::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 64px;
+    border-radius: 2px;
+    background: linear-gradient(
+      to right,
+      var(--su-tangerine) 0 25%,
+      var(--su-magenta) 25% 50%,
+      var(--su-golden) 50% 75%,
+      var(--su-teal) 75% 100%
+    );
+    transform-origin: left;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+  }
+
+  html.js .heading-rule.reveal:not(.is-revealed)::after {
+    transform: scaleX(0);
+  }
 }
 
 @layer utilities {

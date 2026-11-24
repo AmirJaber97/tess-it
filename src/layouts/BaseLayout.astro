@@ -20,6 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
 const nav = [
   { href: '/#apps', label: 'Apps' },
+  { href: '/work/', label: 'Work' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -79,19 +80,19 @@ const nav = [
 
     <div class="sunset-stripe stripe-top h-1" aria-hidden="true"></div>
 
-    <header class="site-header mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-5">
-      <a href="/" class="font-mono text-base font-medium tracking-tight">
+    <header class="site-header mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-5 max-[349px]:px-4">
+      <a href="/" class="shrink-0 whitespace-nowrap font-mono text-base font-medium tracking-tight">
         <span class="wordmark-text">tess-it</span><span
-          class="cursor-blink text-tangerine"
+          class="cursor-blink text-tangerine max-[349px]:hidden"
           aria-hidden="true">▌</span>
       </a>
 
-      <nav aria-label="Main" class="flex items-center gap-1 sm:gap-2">
+      <nav aria-label="Main" class="flex items-center min-[400px]:gap-0.5 sm:gap-2">
         {
           nav.map((item) => (
             <a
               href={item.href}
-              class="rounded px-2 py-1.5 text-sm text-ink-muted transition-colors hover:text-ink sm:px-3"
+              class="rounded px-1 py-1.5 text-sm text-ink-muted transition-colors hover:text-ink min-[400px]:px-2 sm:px-3"
             >
               {item.label}
             </a>
@@ -102,7 +103,7 @@ const nav = [
           id="theme-toggle"
           type="button"
           aria-label="Toggle dark mode"
-          class="ml-1 rounded-md border border-line p-2 text-ink-muted transition-[color,border-color,scale] hover:border-tangerine hover:text-ink active:scale-90"
+          class="ml-0.5 rounded-md border border-line p-1.5 text-ink-muted transition-[color,border-color,scale] hover:border-tangerine hover:text-ink active:scale-90 max-[349px]:ml-0 max-[349px]:p-1 min-[400px]:ml-1 min-[400px]:p-2"
         >
           <svg
             class="block size-4 dark:hidden"

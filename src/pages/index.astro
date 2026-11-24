@@ -136,12 +136,18 @@ const fShowBadge = !!f && (f.platforms.includes('macos') || f.platforms.includes
         seventeen commercial projects across mobile, web, and desktop. These days I put that
         experience into apps of my own: small, colorful, carefully made tools.
       </p>
-      <p>
+      <p class="flex flex-wrap gap-x-6 gap-y-2">
         <a
           href="/about/"
           class="font-medium text-accent underline decoration-2 underline-offset-4 transition-colors hover:decoration-magenta"
         >
           More about me →
+        </a>
+        <a
+          href="/work/"
+          class="font-medium text-accent underline decoration-2 underline-offset-4 transition-colors hover:decoration-magenta"
+        >
+          Work with me →
         </a>
       </p>
     </div>
@@ -149,24 +155,6 @@ const fShowBadge = !!f && (f.platforms.includes('macos') || f.platforms.includes
 </BaseLayout>
 
 <style>
-  /* Above-the-fold entrance: pure CSS so it needs no JS and runs on load.
-     The global reduced-motion override disables it. */
-  .hero-enter {
-    animation: hero-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: var(--enter-delay, 0s);
-  }
-
-  @keyframes hero-enter {
-    from {
-      opacity: 0;
-      transform: translateY(18px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   /* Featured app screenshot: soft accent-tinted lift. */
   .featured-media img {
     box-shadow: 0 20px 50px -32px var(--app-accent, transparent);
@@ -235,37 +223,6 @@ const fShowBadge = !!f && (f.platforms.includes('macos') || f.platforms.includes
       transparent 56px
     );
     mask-image: linear-gradient(to top, rgb(0 0 0 / 0.7), transparent 75%);
-  }
-
-  /* Section headings get a short sunset underline that draws in on reveal. */
-  .heading-rule {
-    position: relative;
-    padding-bottom: 0.85rem;
-  }
-
-  .heading-rule::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 4px;
-    width: 64px;
-    border-radius: 2px;
-    background: linear-gradient(
-      to right,
-      var(--su-tangerine) 0 25%,
-      var(--su-magenta) 25% 50%,
-      var(--su-golden) 50% 75%,
-      var(--su-teal) 75% 100%
-    );
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
-  }
-
-  .heading-rule:global(.is-revealed)::after,
-  html:not(.js) .heading-rule::after {
-    transform: scaleX(1);
   }
 </style>
 
